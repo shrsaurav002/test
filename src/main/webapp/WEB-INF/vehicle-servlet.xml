@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns="http://www.springframework.org/schema/beans">
+
+	<!-- this enables spring-mvc features -->
+	<mvc:annotation-driven />
+
+	<mvc:resources location="/Image/" mapping="/Image/**" />
+
+	<!-- This directs the controller location -->
+
+	<context:component-scan
+		base-package="com.customer.controller" />
+
+	<!-- return the resources as jsp -->
+
+	<bean
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+		id="viewResolver">
+
+		<property
+			value="org.springframework.web.servlet.view.JstlView"
+			name="viewClass" />
+
+		<property value="/WEB-INF/page/" name="prefix" />
+
+		<property value=".jsp" name="suffix" />
+
+	</bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
+
+	<import resource="vehicle-dao.xml" />
+</beans>
